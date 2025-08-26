@@ -18,7 +18,8 @@ class Team (Base):
     name = Column(String(20))
     city = Column(String())
 
-    managers = relationship ('Manager', backref=backref('team')) #connection to managers
+    managers = relationship ('Manager', backref=backref('team', uselist = False)) #connection to managers
+    players = relationship('Player' ,backref=backref('team')) #connection to players
 
     def __repr__(self):
         return f"Team {self.id}: " \
@@ -34,6 +35,7 @@ class Manager (Base):
     Last_name = Column(String(20))
     email = Column(String())
     Hire_Date = Column(DateTime() ,default= datetime.now)
+
     Team_id = Column(Integer(), ForeignKey ('teams.id'))
 
     def __repr__(self):
@@ -43,4 +45,22 @@ class Manager (Base):
         +f"Manager {self.email}:" \
         +f"Manager {self.Hire_Date}:" \
         +f"Mnager {self.Team_id}"
+
+
+class Player (Base):
+    __tablename__ = 'players'
+
+    id = Column(Integer, primary_key = True)
+    First_name = Column(String(20))
+    Last_name = Column(String(20))
+    Age = Column(Integer())
+    Height = Column(String())
+    Position = Column(String())
+    Jersey_Numbet= Column(Integer())
+    Signing_Date= Column(DateTime(), default=datetime.now)
+
+    Team_id = Column(Integer(), ForeignKey ('teams.id'))
+
+
+
 
