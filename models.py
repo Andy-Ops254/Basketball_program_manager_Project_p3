@@ -1,18 +1,21 @@
 from sqlalchemy import String, Integer, DateTime, Float, Boolean
-from sqlalchemy import Column, ForeignKey, create_engine, UniqueConstraint
+from sqlalchemy import Column, ForeignKey, create_engine, Index, UniqueConstraint
 from sqlalchemy.orm import declarative_base, sessionmaker, relationship, backref
 from datetime import datetime
 
 engine = create_engine('sqlite:///basketball_manager.db') #used to translate sql to python n vice versa
 
 Base = declarative_base() #used to create most basic rep. of tables
+Session =sessionmaker(bind=engine)
+session = Session()
 
 class Team (Base):
     __tablename__ = 'teams'
-    # __table_args__ =(
-    #     UniqueConstraint('name',
-    #                     name='unique_name')
-    # )
+    __table_args__ =(
+        UniqueConstraint('name',
+                        name='unique_name'),
+            Index('index_team_name', 'name'))
+
 
     id = Column(Integer, primary_key = True)
     name = Column(String(20))
@@ -29,6 +32,9 @@ class Team (Base):
 
 class Manager (Base):
     __tablename__ = 'managers'
+    __tableargs__ = (
+        Index('index_First_name', 'First_name'),
+    )
 
     id = Column(Integer, primary_key=True)
     First_name = Column(String(20))
@@ -49,6 +55,13 @@ class Manager (Base):
 
 class Player (Base):
     __tablename__ = 'players'
+    __tableargs__ = (
+        Index('index_last_name', 'last_name'),
+        Index('index_jersey_number', 'jersey_number')
+    )
+
+    Index('index_last_name', 'last_name')
+    Index('index_jersey_number', 'jersey_number')
 
     id = Column(Integer, primary_key = True)
     first_name = Column(String(20))
