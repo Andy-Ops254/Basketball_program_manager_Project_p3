@@ -1,6 +1,7 @@
 from sqlalchemy import String, Integer, DateTime, Float, Boolean
 from sqlalchemy import Column, ForeignKey, create_engine, UniqueConstraint
-from sqlalchemy.orm import declarative_base, sessionmaker
+from sqlalchemy.orm import declarative_base, sessionmaker, relationship, backref
+from datetime import datetime
 
 engine = create_engine('sqlite:///basketball_manager.db') #used to translate sql to python n vice versa
 
@@ -17,7 +18,29 @@ class Team (Base):
     name = Column(String(20))
     city = Column(String())
 
+    managers = relationship ('Manager', backref=backref('team')) #connection to managers
+
     def __repr__(self):
         return f"Team {self.id}: " \
         +f"Team {self.name}:" \
         +f"Team {self.city}"
+
+
+class Manager (Base):
+    __tablename__ = 'managers'
+
+    id = Column(Integer, primary_key=True)
+    First_name = Column(String(20))
+    Last_name = Column(String(20))
+    email = Column(String())
+    Hire_Date = Column(DateTime() ,default= datetime.now)
+    Team_id = Column(Integer(), ForeignKey ('teams.id'))
+
+    def __repr__(self):
+        return f"Manager {self.id}: " \
+        +f"Manager {self.First_name}:" \
+        +f"Manager {self.Last_name}:" \
+        +f"Manager {self.email}:" \
+        +f"Manager {self.Hire_Date}:" \
+        +f"Mnager {self.Team_id}"
+
