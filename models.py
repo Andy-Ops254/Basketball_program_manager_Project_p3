@@ -22,8 +22,8 @@ class Team (Base):
     players = relationship('Player' ,backref=backref('team')) #connection to players
 
     def __repr__(self):
-        return f"Team {self.id}: " \
-        +f"Team {self.name}:" \
+        return f"Team {self.id}, " +\
+        +f"Team {self.name}," +\
         +f"Team {self.city}"
 
 
@@ -39,27 +39,38 @@ class Manager (Base):
     Team_id = Column(Integer(), ForeignKey ('teams.id'))
 
     def __repr__(self):
-        return f"Manager {self.id}: " \
-        +f"Manager {self.First_name}:" \
-        +f"Manager {self.Last_name}:" \
-        +f"Manager {self.email}:" \
-        +f"Manager {self.Hire_Date}:" \
-        +f"Mnager {self.Team_id}"
+        return f"Manager {self.id}, " +\
+        f"Manager {self.First_name}," +\
+        f"Manager {self.Last_name}," +\
+        f"Manager {self.email}," +\
+        f"Manager {self.Hire_Date}," +\
+        f"Mnager {self.Team_id}"
 
 
 class Player (Base):
     __tablename__ = 'players'
 
     id = Column(Integer, primary_key = True)
-    First_name = Column(String(20))
-    Last_name = Column(String(20))
-    Age = Column(Integer())
-    Height = Column(String())
-    Position = Column(String())
-    Jersey_Numbet= Column(Integer())
-    Signing_Date= Column(DateTime(), default=datetime.now)
+    first_name = Column(String(20))
+    last_name = Column(String(20))
+    age = Column(Integer())
+    height = Column(String())
+    position = Column(String())
+    jersey_number= Column(Integer())
+    signing_date= Column(DateTime(), default=datetime.now)
 
     Team_id = Column(Integer(), ForeignKey ('teams.id'))
+
+    def __repr__(self):
+        return f"Player {self.id}, " +\
+        f"Player {self.first_name}," +\
+        f"Player {self.last_name}," +\
+        f"Player {self.age}," +\
+        f"Player {self.height}," +\
+        f"Player {self.position}," +\
+        f"Player {self.jersey_number}," +\
+        f"Player {self.signing_date}," +\
+        f"Player {self.Team_id}"
 
 
 
