@@ -41,7 +41,7 @@ def show_players(last_name = None, jersey_number=None):
         query = query.filter(Player.last_name==last_name)
 
     if jersey_number:
-        query = query.filter(Player.jersey_number==jersey_number)
+        query = query.filter_by(jersey_number==jersey_number)
     
     players = query.all()
 
@@ -52,16 +52,17 @@ def show_players(last_name = None, jersey_number=None):
             print(f"last_name:{player.last_name}, jersey{player.jersey_number}")
 
     # return players
-    session.commit()
+    #end session since its read only
+    session.close()
 
-def show_teams(name=None, team_id=None):
+def show_teams(name, teams_id):
     query =session.query(Team)
 
     if name:
         query = query.filter(Team.name==name)
 
-    if team_id:
-        query = query.filter_by(Team.team_id==team_id)
+    if teams_id:
+        query = query.filter_by(teams_id==teams_id)
     
     teams = query.all()
 
@@ -70,3 +71,10 @@ def show_teams(name=None, team_id=None):
     else:
         for team in teams:
             print(f"team_name: {team.name}")
+
+
+def delete_player(players_id):
+    query = session.query(Player).where(id == players_id)
+
+    session.delete(query)
+    session.commit()
