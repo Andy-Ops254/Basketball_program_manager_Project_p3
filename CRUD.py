@@ -1,5 +1,6 @@
 from models import Team, Player, Manager, session
 
+#Create ops
 def add_team (teams_id, name, city):
     new_team = Team(teams_id=teams_id, name=name, city=city)
     session.add(new_team)
@@ -30,3 +31,42 @@ def add_player(players_id, first_name, last_name, age, height, position, jersey_
     )
     session.add(new_player)
     session.commit()
+
+#find queries
+
+def show_players(last_name = None, jersey_number=None):
+    query = session.query(Player) #will show all players
+
+    if last_name:
+        query = query.filter(Player.last_name==last_name)
+
+    if jersey_number:
+        query = query.filter(Player.jersey_number==jersey_number)
+    
+    players = query.all()
+
+    if not player:
+        print("playerdoes not exist")
+    else:
+        for player in players:
+            print(f"last_name:{player.last_name}, jersey{player.jersey_number}")
+
+    # return players
+    session.commit()
+
+def show_teams(name=None, team_id=None):
+    query =session.query(Team)
+
+    if name:
+        query = query.filter(Team.name==name)
+
+    if team_id:
+        query = query.filter_by(Team.team_id==team_id)
+    
+    teams = query.all()
+
+    if not team:
+        print("Team is invalid!")
+    else:
+        for team in teams:
+            print(f"team_name: {team.name}")
