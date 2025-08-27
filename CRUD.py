@@ -34,7 +34,7 @@ def add_player(players_id, first_name, last_name, age, height, position, jersey_
 
 #find queries
 
-def show_players(last_name = None, jersey_number=None):
+def show_players(last_name, jersey_number):
     query = session.query(Player) #will show all players
 
     if last_name:
@@ -64,7 +64,7 @@ def show_teams(name, teams_id):
     if teams_id:
         query = query.filter_by(teams_id==teams_id)
     
-    teams = query.all()
+    teams = query.first()
 
     if not team:
         print("Team is invalid!")
@@ -72,9 +72,16 @@ def show_teams(name, teams_id):
         for team in teams:
             print(f"team_name: {team.name}")
 
+    #Delete Operators for player and managers
 
 def delete_player(players_id):
     query = session.query(Player).where(id == players_id)
+
+    session.delete(query)
+    session.commit()
+
+def delete_manager(managers_id):
+    query = session.query(Manager).where(id==managers_id)
 
     session.delete(query)
     session.commit()
