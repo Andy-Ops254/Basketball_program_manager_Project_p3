@@ -34,11 +34,11 @@ def add_player(first_name, last_name, age, height, position, jersey_number, Team
 
 #find queries
 
-def show_players(last_name, jersey_number):
+def show_player(jersey_number):
     query = session.query(Player) #will show all players
 
-    if last_name:
-        query = query.filter(Player.last_name==last_name)
+    # if last_name:
+    #     query = query.filter(Player.last_name==last_name)
 
     if jersey_number:
         query = query.filter_by(jersey_number==jersey_number)
@@ -53,24 +53,20 @@ def show_players(last_name, jersey_number):
 
     # return players
     #end session since its read only
-    session.close()
+    # session.close()
 
-def show_teams(name, teams_id):
-    query =session.query(Team)
+def show_teams(name):
+    team=session.query(Team)
+    team_name =team.filter(Team.name==name).first()
 
-    if name:
-        query = query.filter(Team.name==name)
-
-    if teams_id:
-        query = query.filter_by(teams_id==teams_id)
+    # if teams_id:
+    #     query = query.filter_by(teams_id==teams_id)
     
-    teams = query.first()
 
-    if not team:
+    if not team_name:
         print("Team is invalid!")
     else:
-        for team in teams:
-            print(f"team_name: {team.name}")
+            print(f"team_name: {team_name.name}")
 
     #Delete Operators for player and managers
 

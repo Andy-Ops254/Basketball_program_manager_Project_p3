@@ -1,5 +1,5 @@
 import click
-from CRUD import add_team, add_manager, add_player, show_players, show_teams, delete_manager,delete_player
+from CRUD import add_team, add_manager, add_player, show_player, show_teams, delete_manager,delete_player
 
 while True:
     click.secho("WELCOME TO MY BASKETBALL PROGRAM MANAGER", fg='bright_white')
@@ -24,24 +24,42 @@ while True:
             try:
                 add_team(name, city)
                 click.secho(f"Welcome to the Gulag {name}")
-                click
-
             except Exception as Dawgs:
                 click.secho(f"Error adding Team {Dawgs}", fg='red')
 
         if team_option == 2:
             click.secho("Team list", fg='magenta')
-            name = click.prompt("Team Name:")
+            name = click.prompt("Team Name")
+            show_teams(name)
 
+            # try:
+            #     show_teams(name)
+            #     click.secho(f"{name}")
+
+            # except Exception as err:
+            #     click.secho("Team does not exist")
+
+    if user_input == 2:
+        click.secho("1. Add to Manager", fg='green')
+        click.secho("2. Delete Manager", fg='green')
+
+        manager_option = click.prompt("Enter manager option", type=int)
+
+        if manager_option==1:
+            click.secho("Assign Manager....", fg='blue')
+            First_name= click.prompt("Enter manager's First name")
+            Last_name= click.prompt("Enter manager's Last name")
+            email = click.prompt("Enter manager's email")
+            Hiring_Date =click.prompt("Enter manager's hiring date")
+            Team_id= click.prompt("Enter team id ")
             try:
-                show_teams(name)
-                click.secho(f"{name}")
+                add_manager(First_name, Last_name, email, Hiring_Date, Team_id)
+                click.secho(f"Welcome tot the team {First_name}" )
+            except:
+                click.secho(f"Manager does not exixst", fg='red' )
 
-            except Exception as err:
-                click.secho("Team does not exist")
-
-
-
+        if manager_option==2:
+            click
 
 
 
