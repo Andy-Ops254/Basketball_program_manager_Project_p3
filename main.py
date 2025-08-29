@@ -97,3 +97,9 @@ while True:
                 click.secho(f"Error adding manager: {err}", fg='red')
 
 
+        if  player_option==2:
+            click.secho("Viewing player....",fg='yellow')
+            jersey_number= click.prompt("Enter player jersey number")
+            show_player(jersey_number)
+
+

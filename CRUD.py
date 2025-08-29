@@ -35,22 +35,18 @@ def add_player(first_name, last_name, age, height, position, jersey_number, Team
 #find queries
 
 def show_player(jersey_number):
-    query = session.query(Player) #will show all players
-
-    # if last_name:
-    #     query = query.filter(Player.last_name==last_name)
-
     if jersey_number:
-        query = query.filter_by(jersey_number==jersey_number)
+        player= session.query(Player).filter(Player.jersey_number==jersey_number).first()
     
-    players = query.all()
-
-    if not player:
-        print("playerdoes not exist")
+        if player:
+            print(f"player found !")
+            print(f"id: {player.id}")
+            print(f"lastname: {player.last_name}")
+            print(f"jerseynumber: {player.jersey_number}")
+        else:
+            print("player does not exist")
     else:
-        for player in players:
-            print(f"last_name:{player.last_name}, jersey{player.jersey_number}")
-
+        print("please provide jersey number")
     # return players
     #end session since its read only
     # session.close()
