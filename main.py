@@ -66,10 +66,34 @@ while True:
             manager_id = click.prompt("Enter manager's Id")
             try:
                 delete_manager(manager_id)
-                click.secho(f"DELETED {manager_id}")
+                click.secho(f"DELETED {manager_id}", fg="bright_red")
             except Exception as e:
                 click.secho(f"MANAGER DOES NOT EXIST: {e}", fg='red')
 
+#PLAYER OPTIONS
 
+    if user_input==3:
+        click.secho("1. Create Player", fg="blue")
+        click.secho("2. Show Player", fg="blue")
+        click.secho("3. Delete player", fg="blue")
+
+        player_option = click.prompt("Enter player option",type=int)
+
+        if player_option==1:
+            click.secho("Add player....", fg='bright_magenta')
+            first_name = click.prompt("Enter players' firstname")
+            last_name = click.prompt("Enter players' lastname")
+            age = click.prompt("Enter player age")
+            height = click.prompt("Enter players' height")
+            position = click.prompt("Enter players' position")
+            jersey_number = click.prompt("Enter players' jersey number")
+            Team_id = click.prompt("Enter players' team id")
+
+            try:
+                Team_id = int(Team_id)
+                add_player(first_name, last_name, age, height, position, jersey_number, Team_id)
+                click.secho(f"{first_name} added successfully")
+            except Exception as err:
+                click.secho(f"Error adding manager: {err}", fg='red')
 
 
