@@ -8,7 +8,7 @@ while True:
     click.secho("2. Manager", fg='green')
     click.secho("3. Player", fg="green")
 
-    user_input = click.prompt("Seleect option", type=int)
+    user_input = click.prompt("Select option", type=int)
 
     if user_input == 1:
         click.secho("1. Add new team", fg="yellow")
@@ -39,6 +39,8 @@ while True:
             # except Exception as err:
             #     click.secho("Team does not exist")
 
+#manager options
+
     if user_input == 2:
         click.secho("1. Add to Manager", fg='green')
         click.secho("2. Delete Manager", fg='green')
@@ -50,16 +52,24 @@ while True:
             First_name= click.prompt("Enter manager's First name")
             Last_name= click.prompt("Enter manager's Last name")
             email = click.prompt("Enter manager's email")
-            Hiring_Date =click.prompt("Enter manager's hiring date")
-            Team_id= click.prompt("Enter team id ")
+            # Hire_Date =click.prompt("Enter manager's hiring date")
+            Team_id = click.prompt("Enter team id ")
             try:
-                add_manager(First_name, Last_name, email, Hiring_Date, Team_id)
-                click.secho(f"Welcome tot the team {First_name}" )
-            except:
-                click.secho(f"Manager does not exixst", fg='red' )
+                Team_id = int(Team_id)
+                add_manager(First_name, Last_name, email, Team_id)
+                click.secho(f"{First_name} added successfully")
+            except Exception as err:
+                click.secho(f"Error adding manager: {err}", fg='red')
 
         if manager_option==2:
-            click
+            click.secho("Delete Manager", fg='red')
+            manager_id = click.prompt("Enter manager's Id")
+            try:
+                delete_manager(manager_id)
+                click.secho(f"DELETED {manager_id}")
+            except Exception as e:
+                click.secho(f"MANAGER DOES NOT EXIST: {e}", fg='red')
+
 
 
 

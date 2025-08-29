@@ -6,13 +6,13 @@ def add_team (name, city):
     session.add(new_team)
     session.commit()
 
-def add_manager( First_name, Last_name, email, Hiring_Date, Team_id):
+def add_manager( First_name, Last_name, email, Team_id):
     new_manager = Manager(
         # managers_id = managers_id,
         First_name = First_name,
         Last_name = Last_name,
         email = email,
-        Hiring_Date = Hiring_Date,
+        # Hire_Date = Hire_Date,
         Team_id = Team_id
     )
     session.add(new_manager)
@@ -66,7 +66,7 @@ def show_teams(name):
     if not team_name:
         print("Team is invalid!")
     else:
-            print(f"team_name: {team_name.name}")
+            print(f"id :{team_name.id}| team_name: {team_name.name}")
 
     #Delete Operators for player and managers
 
