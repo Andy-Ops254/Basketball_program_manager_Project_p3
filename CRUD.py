@@ -67,10 +67,14 @@ def show_teams(name):
     #Delete Operators for player and managers
 
 def delete_player(players_id):
-    query = session.query(Player).where(id == players_id).first()
+    query = session.query(Player).where(Player.id == players_id).first()
+
+    if query is None:
+        raise Exception (f"{players_id } does not exist")
 
     session.delete(query)
     session.commit()
+
 
 def delete_manager(managers_id):
     query = session.query(Manager).where(Manager.id==managers_id).one()

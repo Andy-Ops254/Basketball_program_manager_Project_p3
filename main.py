@@ -102,4 +102,12 @@ while True:
             jersey_number= click.prompt("Enter player jersey number")
             show_player(jersey_number)
 
+        if player_option==3:
+            click.secho("Delete player", fg='red')
+            players_id = click.prompt("Enter player's Id")
+            try:
+                delete_player(players_id)
+                click.secho(f"DELETED {players_id}", fg="bright_red")
+            except Exception as e:
+                click.secho(f"PLAYER DOES NOT EXIST: {e}", fg='red')
 
