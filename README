@@ -1,6 +1,6 @@
 # BASKETBALL PROGRAM MANAGER
 
-A command-line interface (CLI) application for managing basketball teams, players, and managers. This project provides a comprehensive system for tracking team rosters,and management hierarchies in basketball organizations. this project was done by:
+A command-line interface (CLI) application for managing basketball teams, players, and managers. This project provides a comprehensive system for tracking team rosters and management hierarchies in basketball organizations. This project was done by:
 
 - Andrew 
 
@@ -14,7 +14,7 @@ The main menu presents three primary options: Teams, Managers, and Players. Each
 The CRUD.py file contains all the database interaction functions that handle Create, Read, Update, and Delete operations for the three main models. This file serves as the data access layer, abstracting database operations from the CLI interface.
 ### Team Functions:
 
-add_team(): Creates new basketball teams with team name and city.
+add_team(): Creates new basketball teams with team, name and city.
 show_team(): Retrieves and displays team information including team details.
 
 
