@@ -1,0 +1,120 @@
+# BASKETBALL PROGRAM MANAGER
+
+A command-line interface (CLI) application for managing basketball teams, players, and managers. This project provides a comprehensive system for tracking team rosters,and management hierarchies in basketball organizations. this project was done by:
+
+- Andrew 
+
+ # FILE STRUCTURE
+
+## main.py - Interactive CLI Application
+The main.py file serves as the entry point for the Basketball Program Manager application. It creates an interactive command-line interface using the Click library that guides users through various management operations.
+The main menu presents three primary options: Teams, Managers, and Players. Each option leads to a submenu with specific CRUD operations. The application uses a nested menu system where users can navigate between different sections. The interface provides colored output using Click's styling features to enhance user experience, with different colors indicating different types of operations.
+
+## CRUD.py - Database Operations
+The CRUD.py file contains all the database interaction functions that handle Create, Read, Update, and Delete operations for the three main models. This file serves as the data access layer, abstracting database operations from the CLI interface.
+### Team Functions:
+
+add_team(): Creates new basketball teams with team name and city.
+show_team(): Retrieves and displays team information including team details.
+
+
+### Manager Functions:
+
+add_manager(): Adds new managers to the system with personal information, hire dates, and team assignments. Validates email formats and handles date conversion from string input.
+show_manager(): Displays manager information including personal details, hire date, and assigned teams.
+delete_manager(): Removes managers from the database.
+
+### Player Functions:
+
+add_player(): Registers new players with personal information, jersey numbers, positions, and team assignments. Validates jersey number uniqueness within teams.
+show_player(): Searches for players by jersey number and displays their information including position, team assignment.
+delete_player(): Removes players from the database.
+
+## models.py - Database Models
+The models.py file defines the database schema using SQLAlchemy ORM, establishing the data models and relationships between Teams, Managers, and Players.
+
+### Team Model:
+The Team class represents basketball teams with attributes including team ID (primary key), team name, location. It establishes relationships with both managers and players through foreign key references. The model includes validation constraints to ensure team names are unique.
+
+### Manager Model:
+The Manager class stores information about team managers including personal details (first name, last name, email), hire date with automatic timestamp default, and team assignment. The model establishes a one-to-many relationship with teams, allowing managers to oversee multiple teams. It includes email validation and proper datetime handling for hire dates.
+
+### Player Model:
+The Player class represents individual basketball players with comprehensive information including personal details, jersey number, position, team assignment, and performance statistics. The model enforces jersey number uniqueness within teams through composite constraints. It establishes a many-to-one relationship with teams, allowing multiple players per team while ensuring each player belongs to only one team.
+
+
+
+# HOW TO USE
+
+## REQUIREMENTS
+- WIFI connection
+- computer or mobile phone
+
+## VIEW LIVE SITE
+
+### Installation process (local)
+1. Clone repository using:
+```
+git@github.com:Andy-Ops254/Basketball_program_manager_Project_p3.git
+```
+
+2. Navigate to the project directory:
+```
+cd Basketball_program_manager_Project_p3.git
+```
+
+3. Open VS code on the same directory:
+```
+code .
+```
+
+3. Click on terminal, then New terminal
+
+4. Install dependencies on your terminal on vs code
+```
+pip install sqlalchemy 
+```
+5. Install dependencies on your terminal on vs code
+```
+pip install  click
+```
+6. Install dependencies on your terminal on vs code
+```
+pip install alembic
+```
+7. Remember to also create virtual environments for python using:
+```
+pipenv install, then pipenv shell
+```
+
+### Run the project
+```
+python3 main.py
+```
+
+## TECHNOLOGIES USED:
+
+- python
+- SQLAlchemy for database
+
+## FEATURES
+
+- Interactive command-line interface with colored output
+- Complete CRUD operations for all entities
+- Relationship management between teams, managers, and players
+- Data validation and error handling
+-  database with proper foreign key constraints
+- Session management for database operations
+- User-friendly navigation with return-to-menu 
+
+
+# LICENCE
+
+### MIT License
+
+Copyright (c) 2025 Rimongi_11
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
